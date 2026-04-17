@@ -12,11 +12,8 @@ def show_menu():
 
 
 def main():
-    manager = TaskManager()
     storage = Storage()
-
-    # Charger les tâches existantes
-    manager.tasks = storage.load_tasks()
+    manager = TaskManager(storage)
 
     while True:
         show_menu()
@@ -39,7 +36,6 @@ def main():
             manager.mark_task_done(task_id)
 
         elif choice == "5":
-            # Sauvegarde avant de quitter
             storage.save_tasks(manager.tasks)
             print("Au revoir 👋")
             break
