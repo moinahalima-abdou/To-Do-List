@@ -1,7 +1,3 @@
-import uuid
-from datetime import datetime
-
-
 class Task:
     def __init__(self, title, description=""):
         self.id = str(uuid.uuid4())
@@ -12,3 +8,12 @@ class Task:
 
     def mark_as_done(self):
         self.done = True
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "done": self.done,
+            "created_at": self.created_at
+        }
