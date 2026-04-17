@@ -1,3 +1,6 @@
+import uuid
+from datetime import datetime
+
 class Task:
     def __init__(self, title, description=""):
         self.id = str(uuid.uuid4())
