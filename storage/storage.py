@@ -10,7 +10,7 @@ class Storage:
         data = [task.to_dict() for task in tasks]
 
         with open(self.filename, "w", encoding="utf-8") as file:
-            json.dump(data, file, indent=4)
+            json.dump(data, file, indent=4, ensure_ascii=False)
 
     def load_tasks(self):
         try:

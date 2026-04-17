@@ -2,11 +2,20 @@ from tasks.task import Task
 
 
 class TaskManager:
-    def __init__(self):
-        self.tasks = []
+    def __init__(self, storage):
+        self.storage = storage
+        self.tasks = self.storage.load_tasks()
+
+        if self.tasks:
+            self.next_id = max(int(task.id) for task in self.tasks) + 1
+        else:
+            self.next_id = 1
 
     def add_task(self, title, description=""):
         task = Task(title, description)
+        task.id = self.next_id
+        self.next_id += 1
+
         self.tasks.append(task)
         print("Tâche ajoutée !")
 
@@ -21,7 +30,7 @@ class TaskManager:
 
     def delete_task(self, task_id):
         for task in self.tasks:
-            if task.id == task_id:
+            if int(task.id) == int(task_id):
                 self.tasks.remove(task)
                 print("Tâche supprimée !")
                 return
@@ -30,7 +39,7 @@ class TaskManager:
 
     def mark_task_done(self, task_id):
         for task in self.tasks:
-            if task.id == task_id:
+            if int(task.id) == int(task_id):
                 task.mark_as_done()
                 print("Tâche marquée comme faite !")
                 return
